@@ -1,0 +1,13 @@
+{
+  "default":{
+    "rows": 4,
+    "columns": 4,
+    "border_size": 2,
+    "spacing": 8,
+    "target_width": 1920,
+    "time_stamps": true,
+    "background_color": [49, 45, 44],
+    "border_color": [192, 191, 187],
+    "font_color": [255, 255, 255]
+  }
+}

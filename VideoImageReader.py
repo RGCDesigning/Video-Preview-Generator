@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import os
 
 
 def get_images(number_of_screenshots, vidcap, border=True, border_size=2, resize_to_width=None, resize_to_height=None,
@@ -40,7 +41,6 @@ def get_images(number_of_screenshots, vidcap, border=True, border_size=2, resize
             cv2.putText(image, format_time(frame_number, video_fps),
                         (top_right[0], 4 + top_right[1] * 2), fontFace=font, fontScale=font_scale, color=font_color,
                         lineType=line_type)
-            cv2.imwrite('Preview Image.png', image)
         images.append(image)
         counter += itr
         vidcap.set(1, counter)
@@ -53,7 +53,8 @@ def get_images(number_of_screenshots, vidcap, border=True, border_size=2, resize
 
 
 def create_preview(columns, rows, video_file_name, target_width=1920, border_size=0, spacing=0,
-                   border_color=(192, 191, 187), background_color=(49, 45, 44)):
+                   border_color=(192, 191, 187), background_color=(49, 45, 44), time_stamps=True,
+                   font_color=(255, 255, 255)):
     assert(columns > 1 and rows > 1), "Invalid number of rows or columns"
     title_space = 50
 
@@ -73,9 +74,9 @@ def create_preview(columns, rows, video_file_name, target_width=1920, border_siz
     vheight = int((height * vwidth) / width)
 
     images = get_images(total_images, vidcap, border_size=border_size, resize_to_height=vheight, resize_to_width=vwidth,
-                        border_color=border_color)
+                        border_color=border_color, timestamps=time_stamps)
 
-    print('Creating Preview Image')
+    print('Creating Preview Image\n')
 
     k = 0
     image_rows = []
@@ -100,7 +101,7 @@ def create_preview(columns, rows, video_file_name, target_width=1920, border_siz
         x = [temp_image, border]
         temp_image = np.concatenate((x), axis=1)
         image_rows.append(temp_image)
-    print(str(len(image_rows)) + ' rows created')
+    # print(str(len(image_rows)) + ' rows created')
 
     # Create border on top for text
     row_height, row_width = image_rows[0].shape[:2]
@@ -134,7 +135,6 @@ def create_preview(columns, rows, video_file_name, target_width=1920, border_siz
     font = cv2.FONT_HERSHEY_SIMPLEX
     top_right = (12, 20)
     font_scale = 0.5
-    font_color = (255, 255, 255)
     line_type = 8
     cv2.putText(image, video_file_name.split('\\')[-1],
                 top_right, fontFace=font, fontScale=font_scale, color=font_color, lineType=line_type)
@@ -142,7 +142,7 @@ def create_preview(columns, rows, video_file_name, target_width=1920, border_siz
                 (top_right[0], 4+top_right[1]*2), fontFace=font, fontScale=font_scale, color=font_color,
                 lineType=line_type)
 
-    cv2.imwrite( video_file_name.split('\\')[-1].split('.')[0] + ' Preview Image.png', image)
+    cv2.imwrite(video_file_name.split('\\')[-1] + ' -- Preview Image.png', image)
 
 
 def format_time(current_frame, video_fps):
@@ -154,5 +154,3 @@ def format_time(current_frame, video_fps):
 
     return str(h).zfill(2) + ':' + str(m).zfill(2) + ':' + str(s).zfill(2)
 
-
-create_preview(3, 3, "E:\\Video\Movies\\blade-runner.mp4", border_size=2, spacing=8)
