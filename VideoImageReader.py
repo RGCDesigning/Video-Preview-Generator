@@ -54,7 +54,7 @@ def get_images(number_of_screenshots, vidcap, border=True, border_size=2, resize
 
 def create_preview(columns, rows, video_file_name, target_width=1920, border_size=0, spacing=0,
                    border_color=(192, 191, 187), background_color=(49, 45, 44), time_stamps=True,
-                   font_color=(255, 255, 255)):
+                   font_color=(255, 255, 255), save_location=''):
     assert(columns > 1 and rows > 1), "Invalid number of rows or columns"
     title_space = 50
 
@@ -142,7 +142,10 @@ def create_preview(columns, rows, video_file_name, target_width=1920, border_siz
                 (top_right[0], 4+top_right[1]*2), fontFace=font, fontScale=font_scale, color=font_color,
                 lineType=line_type)
 
-    cv2.imwrite(video_file_name.split('\\')[-1] + ' -- Preview Image.png', image)
+    if save_location[-1] is not '\\':
+        save_location = str(save_location) + '\\'
+
+    cv2.imwrite(save_location + video_file_name.split('\\')[-1] + ' -- Preview Image.png', image)
 
 
 def format_time(current_frame, video_fps):

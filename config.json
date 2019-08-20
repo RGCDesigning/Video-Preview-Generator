@@ -9,5 +9,16 @@
     "background_color": [49, 45, 44],
     "border_color": [192, 191, 187],
     "font_color": [255, 255, 255]
-  }
+  },
+	"weird_green": {
+		"rows": 6,
+		"columns": 5,
+		"border_size": 2,
+		"spacing": 8,
+		"target_width": 1920,
+		"time_stamps": true,
+		"background_color": [22, 160, 133],
+		"border_color": [26, 188, 156],
+		"font_color": [255, 255, 255]
+	}
 }
