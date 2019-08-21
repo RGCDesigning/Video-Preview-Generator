@@ -60,7 +60,7 @@ if __name__ == '__main__':
     save_location = str(args.save)
     if args.save is None:
         print('No path selected. Saving next to video files. Set save path with --save C:\\example\\')
-        if expected_default_path[-1] == '\\':
+        if len(expected_default_path) > 0 and expected_default_path[-1] == '\\':
             save_location = str(expected_default_path)
         else:
             save_location = str(expected_default_path) + '\\'

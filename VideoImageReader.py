@@ -145,7 +145,7 @@ def create_preview(columns, rows, video_file_name, target_width=1920, border_siz
     if save_location[-1] is not '\\':
         save_location = str(save_location) + '\\'
 
-    cv2.imwrite(save_location + video_file_name.split('\\')[-1] + ' -- Preview Image.png', image)
+    cv2.imwrite(save_location.replace('\\', '') + video_file_name.split('\\')[-1] + ' -- Preview Image.png', image)
 
 
 def format_time(current_frame, video_fps):
