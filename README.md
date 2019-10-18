@@ -8,7 +8,7 @@ Generates video preview image for video files.
 
 
 ### Dependencies
-* [opencv-python](https://pypi.org/project/opencv-python/) - HTML to Markdown converter
+* [opencv-python](https://pypi.org/project/opencv-python/) - Open Image Processing
 
 
 ### Installation
